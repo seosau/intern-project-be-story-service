@@ -6,6 +6,6 @@ import { softDeleteMiddleware } from "./middlewares/softDelete.middleware";
 export class PrismaService extends PrismaClient implements OnModuleInit {
     async onModuleInit() {
         await this.$connect();
-        // this.$use(softDeleteMiddleware)
+        this.$use(softDeleteMiddleware)
     }
 }
