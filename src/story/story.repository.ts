@@ -12,9 +12,14 @@ export class StoryRepository extends PrismaClient<Prisma.PrismaClientOptions, ne
     }
 
     async getAllStory () {
+        const now = new Date()
+        const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000)
         return this.story.findMany({
             where: {
-                deletedAt: null
+                createdAt: {
+                    gte: twentyFourHoursAgo
+                },
+                deletedAt: null,
             },
             orderBy: {
                 createdAt: 'desc'

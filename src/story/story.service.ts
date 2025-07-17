@@ -60,7 +60,11 @@ export class StoryService {
         const resp = {
             stories: stories.map((story) => reflect(story))
         } as GetAllStoriesResponse
-
+        const indexToFirst = resp.stories.findIndex((story) => story.id === data.firtId)
+        if(indexToFirst > 0) {
+            const [item] = resp.stories.splice(indexToFirst, 1);
+            resp.stories.unshift(item);
+        }
         return resp;
     }
     async createStory(data: CreateStoryRequest): Promise<CreateStoryResponse> {
