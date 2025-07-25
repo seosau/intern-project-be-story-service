@@ -51,7 +51,7 @@ export class StoryService {
     async getAllStory(data: GetAllStoriesRequest): Promise<GetAllStoriesResponse> {
         const stories = await this.storyRepo.getAllStory()
 
-        if (stories.length === 0) {
+        if (!stories || stories.length === 0) {
             return {
                 stories: []
             }
